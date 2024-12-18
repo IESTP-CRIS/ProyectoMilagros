@@ -1,0 +1,481 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+    --Titulos: "Poppins", sans-serif;
+    --SubTitulos: "Roboto", sans-serif;
+    --BarraSuperior: #262626;
+    --Primario: #383838;
+    --Secundario: #FFC300;
+    --Terciario: #007BFF;
+    --Hover: #E4E7EA;
+    --FondoContenedor: #E4E5E6;
+}
+body{
+    position: relative;
+}
+.contenedorBusqueda{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+    background: rgba(0, 0, 0, 0.600);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 3;
+}
+.contenedorBusqueda .busquedaMayoritaria{
+    width: 900px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid var(--BarraSuperior);
+    background: #fff;
+}
+.busquedaMayoritaria .contenedorArriba,
+.busquedaMayoritaria .contenedorAbajo{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+.contenedorArriba .busqueda,
+.contenedorAbajo .busquedaCodigo{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.contenedorAbajo .busquedaCodigo{
+    width: 40%;
+}
+.contenedorAbajo .contenedorCerrar{
+    width: 100px;
+    border-radius: 5px;
+    border: 2px solid var(--Secundario);
+    background: var(--Secundario);
+    transition: background .5s ease-in-out;
+}
+.contenedorCerrar:hover{
+    background: #e29700;
+}
+.contenedorCerrar .btnCerrar{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.contenedorArriba .datosMostrados{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.busqueda h5,
+.datosMostrados h5,
+.busquedaCodigo h5{
+    font-weight: 500;
+    font-family: var(--SubTitulos);
+}
+.busqueda .mayoritaria,
+.busquedaCodigo .codigoProducto{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid var(--Terciario);
+    overflow: hidden;
+}
+.mayoritaria input,
+.codigoProducto input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    background: none;
+}
+.mayoritaria .btnLupa,
+.codigoProducto .btnTacho{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 100%;
+    outline: none;
+    border: none;
+    color: #fff;
+    background: var(--Terciario);
+    transition: background .5s ease-in-out;
+    cursor: pointer;
+}
+.btnTacho:hover{
+    color: #fff;
+    background: darkred;
+}
+/*-----Estilos Para Los Botones y El Contenedor De Los Wigdets-----*/
+.widget-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.tabs {
+    max-width: 350px;
+    width: 100%;
+    display: inline-block;
+}
+.tabs .tab-button{
+    width: calc(340px / 3);
+    text-align: center;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    background: none;
+    color: var(--BarraSuperior);
+    font-family: var(--SubTitulos);
+    font-weight: 500;
+    cursor: pointer;
+}
+.tab-button.active{
+    color: var(--Terciario);
+    position: relative;
+    border-top: 2px solid var(--Terciario);
+    border-right: 2px solid var(--Terciario);
+    border-left: 2px solid var(--Terciario);
+    border-radius: 5px 5px 0 0;
+    background: #fff;
+}
+.tab-button.active::before {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    content: '';
+    width: 100%;
+    height: 5%;
+    background: #fff;
+}
+.tab-content {
+    width: 100%;
+    height: calc(100% - 1rem);
+    display: none;
+    padding: 20px;
+    background: #fff;
+    border: 2px solid var(--Terciario);
+    border-radius: 0 5px 5px 5px;
+}
+.tab-content.active {
+    display: block;
+}
+
+/*-----Estilos Del Primer Contenedor Del Widget-----*/
+.tab-content .contenedorUno{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.contenedorUno h4{
+    color: var(--Primario);
+    font-family: var(--Titulos);
+}
+.contenedorUno #datetime{
+    width: 170px;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    border: 2px solid var(--Primario);
+    background: #E4E7EA;
+}
+.tab-content .contenedorDos{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/*-----Contenedor Input Uno y Dos-----*/
+.contenedorInputUno,
+.contenedorInputDos,
+.contenedorInputTres{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+.contenedorInputUno .casilleroUno,
+.contenedorInputDos .casilleroDos,
+.contenedorInputTres .casilleroTres{
+    width: 50%;
+    display: flex;
+    gap: 1rem;
+}
+
+
+.casilleroUno .ruc,
+.casilleroUno .razonSocial{
+    width: calc(100% / 2);
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid var(--Terciario);
+}
+.casilleroDos .medida,
+.casilleroDos .precio,
+.casilleroDos .igv,
+.casilleroDos .tipo,
+.casilleroDos .codigo,
+.casilleroTres .logoYape,
+.casilleroTres .logoPlin,
+.casilleroTres .logoEfectivo,
+.casilleroTres .logoCredito,
+.casilleroTres .logoDeposito{
+    width: calc(100% / 5);
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid var(--Terciario);
+}
+
+
+.ruc input,
+.razonSocial input,
+.direccion input,
+.contenedorBtn .btn-agregar{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    padding: .5rem;
+}
+.direccion input{
+    background: #E4E7EA;
+}
+
+
+.medida input,
+.precio input,
+.igv input,
+.tipo select,
+.codigo input,
+.descripcion input,
+.logoYape .yape,
+.logoPlin .plin,
+.logoEfectivo .efectivo,
+.logoCredito .credito,
+.logoDeposito .deposito{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    padding: .5rem;
+}
+.igv input{
+    background: #E4E7EA;
+}
+.tipo select{
+    font-family: var(--Titulos);
+}
+.yape,
+.plin,
+.efectivo,
+.credito,
+.deposito{
+    display: flex;
+}
+.yape img,
+.plin img,
+.efectivo img,
+.credito img,
+.deposito img{
+    width: 50%;
+    height: 100%;
+    object-fit: contain;
+    cursor: pointer;
+}
+.yape .desPago,
+.plin .desPago,
+.efectivo .desPago,
+.credito .desPago,
+.deposito .desPago{
+    width: 50%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-weight: 600;
+    font-size: .625rem;
+    font-family: var(--SubTitulos);
+}
+.yape .desPago.active,
+.plin .desPago.active,
+.efectivo .desPago.active,
+.credito .desPago.active,
+.deposito .desPago.active{
+    width: 100%;
+    color: var(--Secundario);
+    border-radius: 3px;
+    background: var(--BarraSuperior);
+}
+
+
+.casilleroUno .direccion{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid var(--Terciario);
+}
+.casilleroDos .descripcion{
+    position: relative;
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid var(--Terciario);
+}
+.descripcion .contenedorOpciones{
+    position: absolute;
+    width: 60px;
+    height: 100%;
+    right:0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: 0 .5rem;
+    background: var(--FondoContenedor);
+}
+.contenedorOpciones .limpiarBtn,
+.contenedorOpciones .buscarBtn{
+    width: calc(50px / 2);
+    height: 20px;
+}
+.limpiarBtn,
+.buscarBtn{
+    font-size: .625rem;
+    display: grid;
+    place-content: center;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.limpiarBtn{
+    color: #fff;
+    background: var(--Secundario);
+}
+.buscarBtn{
+    color: #fff;
+    background: var(--BarraSuperior);
+}
+
+.casilleroTres .contenedorBtn{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid var(--Secundario);
+    background: var(--Secundario);
+    transition: background .5s ease-in-out;
+}
+.contenedorBtn:hover{
+    background: #e29700;
+}
+.contenedorBtn .btn-agregar{
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 600;
+    font-family: var(--SubTitulos);
+    cursor: pointer;
+}
+
+
+/*-----Contenedor Tres-----*/
+.contenedorTres{
+    border: 2px solid var(--Primario);
+    margin-top: 2rem;
+    overflow: hidden;
+}
+.tabla {
+    width: 100%;
+    border-collapse:collapse;
+}
+.tabla th, .tabla td {
+    padding: .5rem;
+    text-align: center;
+}
+.tabla th {
+    background: var(--Primario);
+    color: #fff;
+    font-weight: 300;
+    font-family: var(--Titulos);
+}
+.tabla td {
+    font-family: var(--SubTitulos);
+}
+
+/*-----Contenedor Cuatro-----*/
+.contenedorCuatro{
+    margin-top: 2rem;
+    overflow: hidden;
+}
+.tituloImporte{
+    padding: .5rem 1rem;
+}
+.tituloImporte h4{
+    text-align: center;
+    color: var(--Primario);
+    font-family: var(--Titulos);
+}
+.datosImporte{
+    display: flex;
+    padding: 1rem 0;
+}
+.titulos,
+.simbolos,
+.datos{
+    position: relative;
+    width: calc(100% / 3);
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.titulos span,
+.simbolos span,
+.datos .txtIgv,
+.datos .txtVentaGrabada,
+.datos .txtVenta{
+    font-weight: 450;
+    font-family: var(--SubTitulos);
+}
+.datos .contenedorEmision{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 35px;
+}
+.contenedorEmision .btnEmitir{
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid var(--Secundario);
+    background: var(--Secundario);
+    transition: background .5s ease-in-out;
+    cursor: pointer;
+}
+.btnEmitir:hover{
+    background: #e29700;
+}
